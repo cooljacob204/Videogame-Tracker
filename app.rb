@@ -1,20 +1,16 @@
-require "sinatra"
+require "sinatra/base"
 require "sinatra/activerecord"
 require 'dotenv/load'
+require 'require_all'
 
-Dir[File.join(File.dirname(__FILE__), "app/models", "*.rb")].each {|f| require f}
-Dir[File.join(File.dirname(__FILE__), "app/controllers", "*.rb")].each {|f| require f}
+require_all 'app/models'
 
-class MyApp < Sinatra::Application
+class MyApp < Sinatra::Base
   configure do
     set :database_file, "db/config.yml"
     set :public_folder, 'app/public'
     set :views, "app/views"
 		set :session_secret, "password_security"
 		enable :sessions
-	end
-
-  get '/' do
-    erb :index
   end
 end
