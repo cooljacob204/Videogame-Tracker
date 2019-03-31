@@ -6,7 +6,6 @@ gem 'sinatra-activerecord'
 gem 'rake'
 gem 'require_all'
 gem 'pg'
-gem 'standalone_migrations'
 gem 'thin'
 gem 'shotgun'
 
