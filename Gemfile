@@ -7,9 +7,11 @@ gem 'rake'
 gem 'require_all'
 gem 'pg'
 gem 'thin'
-gem 'shotgun'
+gem 'dotenv'
+gem 'bcrypt'
 
 group :development do
+  gem 'rerun' if Gem.win_platform?
 end
 
 group :test do
@@ -19,6 +21,6 @@ group :test do
 end
 
 group :test, :development do
-  gem 'dotenv'
   gem 'pry'
+  gem 'wdm' if Gem.win_platform?
 end
