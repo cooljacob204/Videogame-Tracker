@@ -1,0 +1,16 @@
+<head>
+  <link rel="stylesheet" type="text/css" href="/style.css" />
+</head>
+<div class="header-div">
+  <div class="header-user">
+    <% if @user %>
+      <div class="header-user-name">
+        test
+      </div>
+    <% else %>
+      <div class="header-login">
+        <a href='/login'>Log In</a>
+      </div>
+    <% end %>
+  </div>
+</div>
