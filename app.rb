@@ -10,7 +10,7 @@ class MyApp < Sinatra::Base
     set :database_file, "db/config.yml"
     set :public_folder, 'app/public'
     set :views, "app/views"
-		set :session_secret, "password_security"
-		enable :sessions
+    set :session_secret, "password_security"
+    enable :sessions
   end
 end
