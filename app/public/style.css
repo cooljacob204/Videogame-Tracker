@@ -1,4 +1,4 @@
-.header-div{
+.header{
   width: 100%;
   height: 50px;
   background-color: #24292e;
@@ -6,6 +6,11 @@
 
 body {
   margin: 0;
+}
+
+.header-home{
+  float: left;
+  padding: 13px;
 }
 
 .header-user{
@@ -16,10 +21,10 @@ body {
   padding: 13px;
 }
 
-.header-login a:link{
+.header a:link{
   color: white;
 }
 
-.header-login a:visited{
+.header a:visited{
   color: white;
 }
