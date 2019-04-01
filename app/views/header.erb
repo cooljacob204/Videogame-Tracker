@@ -7,15 +7,17 @@
   <div class="header-home">
     <strong><a href='/'>Home</a></strong>
   </div>
-  <div class="header-user">
     <% if @user %>
       <div class="header-username">
         test
       </div>
     <% else %>
-      <div class="header-login">
+      <div class="header-signup header-user">
+        <strong><a href='/register'>Sign Up</a></strong>
+      </div>
+      <div class='header-user-spacer'>|</div>
+      <div class="header-login header-user">
         <strong><a href='/login'>Log In</a></strong>
       </div>
     <% end %>
-  </div>
 </div>

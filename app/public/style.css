@@ -1,6 +1,10 @@
+html{
+  font-size: 25px;
+}
+
 .header{
   width: 100%;
-  height: 50px;
+  height: 3.125rem;
   background-color: #24292e;
   display: flex;
   align-items: center;
@@ -11,16 +15,19 @@ body {
 }
 
 .header-home{
-  padding: 13px;
+  padding: 0.8125rem;
 }
 
 .header-user{
   float: right;
-  margin-left: auto;
+  padding: 0.8125rem;
 }
 
 .header-login{
-  padding: 13px;
+}
+
+.header-signup{  
+  margin-left: auto;
 }
 
 .header a:link{
@@ -29,4 +36,44 @@ body {
 
 .header a:visited{
   color: white;
+}
+
+.header-user-spacer{
+  color: white;
+}
+
+.user-container{
+  display: flex;
+  justify-content: center;
+  margin-top: 3rem
+}
+
+.user{
+  max-width: 18.75rem;
+  margin: 0.9375rem;
+  padding: 0.9375rem;
+}
+
+.userform{
+  margin-bottom: 0;
+}
+
+.userform label{
+  width: 100%;
+  margin-bottom: 0;
+}
+
+.userform input{
+  width: 100%;
+  margin-bottom: .5rem;
+}
+
+.userform #submit{
+  margin-top: .1rem;
+  margin-bottom: .2rem;  
+}
+
+.row-no-padding div{
+  padding-left: 0 !important;
+  padding-right: 0 !important;
 }

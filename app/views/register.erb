@@ -1,9 +1,13 @@
 <%= erb :header %>
 <div class='user-container'>
   <div class='user border border-secondary rounded centered'>
-    <h3>Log In</h3>
+    <h3>Sign Up</h3>
     <hr>
-    <form action='/login' method='post' class='userform'>
+    <form action='/register' method='post' class='userform'>
+      <label><b>First Name</b></label> 
+      <input type='text' id='firstname' name='firstname'>
+      <label><b>Last Name</b></label> 
+      <input type='text' id='lastname' name='lastname'>
       <label><b>Email</b></label> 
       <input type='text' id='email' name='email'>
       <label><b>Password</b></label> 
