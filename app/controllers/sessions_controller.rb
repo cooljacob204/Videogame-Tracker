@@ -5,8 +5,7 @@ class SessionsController < MyApp
 
   post '/login' do
     user = User.find_by(:email => params[:email])
-    
-    if user && user.authenticate(params[:password])
+    if user && user.authenticate(params[:password]) && user.approved?
       user.update(:session_id => session[:session_id])
       session[:firstname] = user.firstname
       session[:lastname] = user.lastname
@@ -31,10 +30,16 @@ class SessionsController < MyApp
   end
 
   post '/register' do
-    user = User.new(params)
+    user = User.new
+    user.firstname = params[:firstname]
+    user.lastname = params[:lastname]
+    user.password = params[:password]
+    user.email = params[:lastname]
+    user.role = :guest
+    user.approval = :waiting
 
     if user.save
-      redirect "/login"
+      erb :post_register
     else
       redirect "/failure"
     end
