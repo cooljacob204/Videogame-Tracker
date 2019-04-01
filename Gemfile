@@ -23,4 +23,5 @@ end
 group :test, :development do
   gem 'pry'
   gem 'wdm' if Gem.win_platform?
+  gem 'shotgun'
 end
