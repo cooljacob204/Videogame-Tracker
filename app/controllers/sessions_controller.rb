@@ -11,6 +11,7 @@ class SessionsController < MyApp
       session[:firstname] = user.firstname
       session[:lastname] = user.lastname
       session[:email] = user.email
+      session[:role] = :guest
       redirect "/"
     else
       redirect "/failure"
@@ -18,8 +19,8 @@ class SessionsController < MyApp
   end
 
   get '/logout' do
-    user = User.find_by(:email => params[:email])
-    user.update(:session_id => nil) if user.session_id == session[:session_id] if user
+    user = User.find_by(:email => session[:email])
+    user.update(:session_id => nil) if user && user.session_id == session[:session_id]
     
     session.clear
     redirect "/"
