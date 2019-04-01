@@ -1,5 +1,9 @@
 class ApplicationController < MyApp
   get '/' do
-    erb :index
+    if authenticate(session)
+      erb :index
+    else
+      erb :index_loggedout
+    end
   end
 end
