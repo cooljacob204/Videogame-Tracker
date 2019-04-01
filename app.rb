@@ -15,4 +15,10 @@ class MyApp < Sinatra::Base
     set :session_secret, 'password_security'
     enable :sessions
   end
+
+  def authenticate(session)
+    user = User.find_by(:email => session[:email])
+    return user if user && user.session_id == session[:session_id]
+    false
+  end
 end
