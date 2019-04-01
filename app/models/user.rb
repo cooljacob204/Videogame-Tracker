@@ -1,6 +1,12 @@
 class User < ActiveRecord::Base
   validates_presence_of :firstname, :lastname, :email, :password, on: :create
+  validates :email, uniqueness: true
   has_secure_password
 
   enum role: [:guest, :manager, :admin]
+  enum approval: [:declined, :waiting, :approved]
+
+  def approved?
+    approval == "approved"
+  end
 end
