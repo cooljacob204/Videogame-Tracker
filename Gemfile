@@ -9,6 +9,7 @@ gem 'pg'
 gem 'thin'
 gem 'dotenv'
 gem 'bcrypt'
+gem 'unifi_api', :git => 'https://github.com/cooljacob204/unifi_api.git'
 
 group :development do
   gem 'rerun' if Gem.win_platform?
