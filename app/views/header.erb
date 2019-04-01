@@ -7,9 +7,13 @@
   <div class="header-home">
     <strong><a href='/'>Home</a></strong>
   </div>
-    <% if @user %>
-      <div class="header-username">
-        test
+    <% if session[:email] %>
+      <div class="header-email header-user">
+        <b><%= session[:email] %></b>
+      </div>
+      <div class='header-user-spacer'>|</div>
+      <div class="header-login header-user">
+        <strong><a href='/logout'>Log Out</a></strong>
       </div>
     <% else %>
       <div class="header-signup header-user">
