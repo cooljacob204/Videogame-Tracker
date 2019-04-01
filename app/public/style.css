@@ -1,5 +1,5 @@
 html{
-  font-size: 25px;
+  font-size: 22px;
 }
 
 .header{
@@ -23,7 +23,9 @@ body {
   padding: 0.8125rem;
 }
 
-.header-login{
+.header-email{
+  color: white;
+  margin-left: auto;
 }
 
 .header-signup{  
@@ -45,7 +47,7 @@ body {
 .user-container{
   display: flex;
   justify-content: center;
-  margin-top: 3rem
+  margin-top: 2rem
 }
 
 .user{
