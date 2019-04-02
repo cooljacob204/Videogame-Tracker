@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: guest-portal
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: guest-portal
+  template:
+    metadata:
+      labels:
+        app: guest-portal
+        name: webapp
+    spec:
+      hostname: guest-portal
+      subdomain: webapp
+      containers:
+        - name: guest-portal
+          image: cooljacob204/guest-portal
+          ports:
+            - name: guest-portal
+              containerPort: 300
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: webapp
+spec:
+  selector:
+    name: webapp
+  clusterIP: None
+  ports:
+  - name: foo
+    port: 1234
+    targetPort: 1234
