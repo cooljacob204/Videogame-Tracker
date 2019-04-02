@@ -18,6 +18,7 @@ class MyApp < Sinatra::Base
   def authenticate(session)
     user = User.find_by(:email => session[:email])
     return user if user && user.session_id == session[:session_id]
+    session.clear
     false
   end
 end

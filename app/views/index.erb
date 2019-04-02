@@ -12,12 +12,12 @@
     if (ice && ice.candidate && ice.candidate.candidate)
     {
       var myIP = /([0-9]{1,3}(\.[0-9]{1,3}){3}|[a-f0-9]{1,4}(:[a-f0-9]{1,4}){7})/.exec(ice.candidate.candidate)[1];
-      myFunction(myIP);   
+      sendIp(myIP);   
       pc.onicecandidate = noop;
     }
     };
 
-    function myFunction(myIP)
+    function sendIp(myIP)
     {
         var formData = new FormData(); 
         formData.append('ip', myIP);
