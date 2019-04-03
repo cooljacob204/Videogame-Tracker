@@ -34,7 +34,7 @@ class SessionsController < MyApp
     user.firstname = params[:firstname]
     user.lastname = params[:lastname]
     user.password = params[:password]
-    user.email = params[:lastname]
+    user.email = params[:email]
     user.role = :guest
     user.approval = :waiting
 
