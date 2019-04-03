@@ -2,3 +2,4 @@ Gemfile.lock
 Dockerfile
 deployment.yaml
 secrets.yaml
+.env

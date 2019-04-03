@@ -34,5 +34,46 @@ spec:
         - name: guest-portal
           image: cooljacob204/guest-portal
           ports:
-            - name: guest-portal
-              containerPort: 3000
+          - name: guest-portal
+            containerPort: 3000
+          env:
+          - name: DB_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: guest-portal
+                key: db-username
+          - name: DB_PORT
+            valueFrom:
+              secretKeyRef:
+                name: guest-portal
+                key: db-port
+          - name: DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: guest-portal
+                key: db-password
+          - name: DB_HOST
+            valueFrom:
+              secretKeyRef:
+                name: guest-portal
+                key: db-host
+          - name: CONTROLLER_USER
+            valueFrom:
+              secretKeyRef:
+                name: guest-portal
+                key: controller_user
+          - name: CONTROLLER_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: guest-portal
+                key: controller_password
+          - name: CONTROLLER_URL
+            valueFrom:
+              secretKeyRef:
+                name: guest-portal
+                key: controller_url
+          - name: CONTROLLER_SITE
+            valueFrom:
+              secretKeyRef:
+                name: guest-portal
+                key: controller_site
