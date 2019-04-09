@@ -3,13 +3,14 @@ kind: Service
 metadata:
   name: webapp
 spec:
+  type: NodePort
   selector:
-    name: webapp
-  clusterIP: None
+    app: guest-portal
   ports:
-  - name: foo
-    port: 1234
-    targetPort: 1234
+  - name: first-port
+    protocol: TCP
+    port: 80
+    targetPort: 3000
 
 ---
 
@@ -52,6 +53,11 @@ spec:
               secretKeyRef:
                 name: guest-portal
                 key: db-password
+          - name: DB_CLIENT_KEY
+            valueFrom:
+              secretKeyRef:
+                name: guest-portal
+                key: db-cert
           - name: DB_HOST
             valueFrom:
               secretKeyRef:
@@ -77,3 +83,5 @@ spec:
               secretKeyRef:
                 name: guest-portal
                 key: controller_site
+          - name: WIFINAME
+            value: Jacob's Wifi
