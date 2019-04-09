@@ -21,5 +21,4 @@ test:
 production:
   <<: *default
   database: home_production
-  sslmode: 'verify-full'
-  sslrootcert: <%= ENV['DB_CLIENT_KEY'] %>
+  sslmode: 'disable'
