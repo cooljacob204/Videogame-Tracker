@@ -7,34 +7,18 @@ class ApplicationController < MyApp
     end
   end
 
+  get '/games' do
+    erb :games
+  end
+
   get '/failure' do
     erb :failure
   end
 
-  get '/connect' do
+  get '/library' do
     user = authenticate(session)
-    if user.approved?
-      #...
-    else
-      redirect '/'
-    end
-  end
+    @games = user.games if user
 
-  post '/local_ip' do
-    user = authenticate(session)
-    user.update(ip_addr: params[:ip]) if user
-  end
-
-  def authorize_guest(mac)
-    url = ENV['CONTROLLER_URL']
-    username = ENV['CONTROLLER_PASSWORD']
-    password = ENV['CONTROLLER_USER']
-    site_id = ENV['CONTROLLER_SITE']
-
-    unifi = UnifiApi::Unifi.new(username: username, password: password, url: url)
-    unifi.login
-    unifi.site_find_by_id(site_id).authorize_guest(mac)
-
-    unifi.logout
+    erb :library
   end
 end

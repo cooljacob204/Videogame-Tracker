@@ -35,8 +35,8 @@ class SessionsController < MyApp
     user.lastname = params[:lastname]
     user.password = params[:password]
     user.email = params[:email]
-    user.role = :approved
-    user.approval = :waiting
+    user.role = :guest
+    user.approval = :approved
 
     if user.save
       user.update(:session_id => session[:session_id])
