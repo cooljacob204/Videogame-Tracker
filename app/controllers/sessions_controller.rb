@@ -10,7 +10,7 @@ class SessionsController < MyApp
       session[:firstname] = user.firstname
       session[:lastname] = user.lastname
       session[:email] = user.email
-      session[:role] = :guest
+      session[:role] = user.role
       redirect "/"
     else
       redirect "/failure"
@@ -35,10 +35,16 @@ class SessionsController < MyApp
     user.lastname = params[:lastname]
     user.password = params[:password]
     user.email = params[:email]
-    user.role = :guest
+    user.role = :approved
     user.approval = :waiting
 
     if user.save
+      user.update(:session_id => session[:session_id])
+      session[:firstname] = user.firstname
+      session[:lastname] = user.lastname
+      session[:email] = user.email
+      session[:role] = user.role
+      
       erb :post_register
     else
       redirect "/failure"

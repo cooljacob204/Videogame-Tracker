@@ -7,6 +7,10 @@ class ApplicationController < MyApp
     end
   end
 
+  get '/failure' do
+    erb :failure
+  end
+
   get '/connect' do
     user = authenticate(session)
     if user.approved?
