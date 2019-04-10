@@ -8,9 +8,11 @@ RUN apt-get update \
 
 RUN gem install bundler
 
-COPY ./ ./
+COPY ./Gemfile ./Gemfile
 
 RUN bundle install
+
+COPY ./ ./
 
 ENV RACK_ENV production
 
