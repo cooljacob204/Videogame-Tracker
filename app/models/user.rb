@@ -6,6 +6,10 @@ class User < ActiveRecord::Base
   enum role: [:guest, :manager, :admin]
   enum approval: [:declined, :waiting, :approved]
 
+  has_many :user_games
+  has_many :games, :through => :user_games
+
+
   def approved?
     approval == "approved"
   end
