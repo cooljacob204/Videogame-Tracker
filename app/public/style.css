@@ -85,3 +85,18 @@ body {
   padding-left: 0 !important;
   padding-right: 0 !important;
 }
+
+.table-container {
+  padding: .5rem;
+}
+
+textarea {
+  resize: none;
+  width: 100%;
+}
+
+.userform textarea{
+  border-color: rgba(0,0,0,.2);
+  border-width: 1px;
+  border-style: inset;
+}
