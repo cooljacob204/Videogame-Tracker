@@ -21,11 +21,11 @@ class ApplicationController < MyApp
     Game.find_by_id(params[:id]).name
   end
 
-  get '/game/new' do
+  get '/games/new' do
     erb :game_new
   end
   
-  post '/game/new' do
+  post '/games/new' do
     game = Game.new()
     game.name = params[:name]
     game.genre = params[:genre]
