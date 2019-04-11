@@ -1,0 +1,42 @@
+<%if @games && !@games.empty?%>
+  <div class='table-container'>
+    <table class='table table-sm table-hover centered border'>
+      <thead>
+        <tr>
+          <th scope='col'>Name</th>
+          <th scope='col'>Genre</th>
+          <th scope='col'>Description</th>
+        </tr>
+      </thead>
+      <%for game in @games%>
+        <tr>
+          <td><%= game.name %></td>
+          <td><%= game.genre %></td>
+          <td><%= game.description %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+<%else%>
+  <div class='user-container'>
+    <div class='register centered'>
+      <h2 class='test'>
+        No games found
+      </h2>
+
+      <% if session[:email] %>
+
+      </p>
+        <a href='/games'>To add games click here</a>
+      </p>
+
+      <% else %>
+
+      </p>
+        <a href='/login'>Login</a> to view your library and add games
+      </p>
+
+      <% end%>
+    </div>
+  </div>
+<%end%>
