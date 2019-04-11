@@ -3,6 +3,21 @@
     <strong><a href='/'>Home</a></strong>
   </div>
     <% if session[:email] %>
+
+      <div class='header-user-spacer'>|</div>
+      <div class="header-home">
+        <strong><a href='/library'>Library</a></strong>
+      </div>
+
+    <% end %>
+
+      <div class='header-user-spacer'>|</div>
+      <div class="header-home">
+        <strong><a href='/games'>Games</a></strong>
+      </div>
+
+
+    <% if session[:email] %>
       <div class="header-email header-user">
         <b><%= session[:email] %></b>
       </div>
@@ -10,7 +25,9 @@
       <div class="header-login header-user">
         <strong><a href='/logout'>Log Out</a></strong>
       </div>
+
     <% else %>
+
       <div class="header-signup header-user">
         <strong><a href='/register'>Sign Up</a></strong>
       </div>
@@ -18,5 +35,6 @@
       <div class="header-login header-user">
         <strong><a href='/login'>Login</a></strong>
       </div>
+
     <% end %>
 </div>
