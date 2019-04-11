@@ -8,7 +8,36 @@ class ApplicationController < MyApp
   end
 
   get '/games' do
+    @games = Game.all
+    user = authenticate(session)
+    @user_games = {}
+    if user
+      @user_games = user.games.map{|game| [game.id, true]}.to_h
+    end
     erb :games
+  end
+
+  get '/game/:id' do
+    Game.find_by_id(params[:id]).name
+  end
+
+  get '/game/new' do
+    erb :game_new
+  end
+  
+  post '/game/new' do
+    game = Game.new()
+    game.name = params[:name]
+    game.genre = params[:genre]
+    game.publisher = params[:publisher]
+    game.description = params[:description]
+
+    if game.save
+      redirect "game/#{game.id}"
+    else
+      require 'pry'
+      binding.pry
+    end
   end
 
   get '/failure' do
