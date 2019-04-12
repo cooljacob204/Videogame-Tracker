@@ -36,8 +36,8 @@ class ApplicationController < MyApp
     if game.save
       redirect "game/#{game.id}"
     else
-      require 'pry'
-      binding.pry
+      @errors = game.errors.messages
+      erb :failure
     end
   end
   
