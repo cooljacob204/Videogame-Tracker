@@ -17,12 +17,12 @@
         <td><%= game.genre %></td>
         <td><%= game.description %></td>
         <% if @user_games[game.id] %>
-          <td>In Library</td>
+          <td class="text-nowrap">In Library</td>
         <% else%>
-          <td>Add to Library</td>
+          <td class="text-nowrap">Add to Library</td>
         <%end%>
       <% if @user.role != 'guest' %>
-        <td class="text-right" scope='col'>
+        <td class="text-right text-nowrap" scope='col'>
           <a href="/game/<%=game.id%>/edit">edit</a> | <a href="/game/<%=game.id%>/delete">remove</a>
         </td>
       <% end %>
