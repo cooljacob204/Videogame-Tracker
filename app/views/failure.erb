@@ -1,3 +1,12 @@
-<h1 class='centered'>Idk what you did but my app doesn't like it</h1>
-
-<p>I'll eventually update this view</p>
+<div class='text-center'>
+  <h1>Woops, my app doesn't like what you just did</h1>
+  <br>
+  <% if @errors %>
+  <p>Hopefully this will give some hints: </p>
+    <% @errors.each do |key, error| %>
+      <% error.each do |error_msg| %>
+      <p class='text-danger'><%= "<b>#{key.to_s}</b> #{error_msg}" %></p>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
