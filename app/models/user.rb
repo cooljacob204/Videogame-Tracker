@@ -13,4 +13,13 @@ class User < ActiveRecord::Base
   def approved?
     approval == "approved"
   end
+
+  def cleaned
+    OpenStruct.new(
+      :firstname => firstname,
+      :lastname => lastname,
+      :email => email,
+      :role => role
+    )
+  end
 end

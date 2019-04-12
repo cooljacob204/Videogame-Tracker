@@ -12,6 +12,7 @@ class ApplicationController < MyApp
     user = authenticate(session)
     @user_games = {}
     if user
+      @user = user.cleaned
       @user_games = user.games.map{|game| [game.id, true]}.to_h
     end
     erb :games
@@ -39,15 +40,15 @@ class ApplicationController < MyApp
       binding.pry
     end
   end
-
-  get '/failure' do
-    erb :failure
-  end
-
+  
   get '/library' do
     user = authenticate(session)
     @games = user.games if user
 
     erb :library
+  end
+  
+  get '/failure' do
+    erb :failure
   end
 end
