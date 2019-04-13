@@ -24,7 +24,7 @@ pipeline {
     stage('Deploy Kubernetes') {
       steps {
         kubernetesDeploy(kubeconfigId: 'd679dcbe-d794-4fad-821c-8e8c85983901',               // REQUIRED
-                 configs: 'https://raw.githubusercontent.com/cooljacob204/sinatra-project/master/deployment.yaml', // REQUIRED
+                 configs: 'deployment.yaml', // REQUIRED
           )
       }
     }
