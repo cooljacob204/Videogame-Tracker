@@ -13,8 +13,7 @@ pipeline {
     }
     stage('build') {
       steps {
-        sh 'docker build -t cooljacob204/videogame-tracker:latest .'
-        sh 'docker tag cooljacob204/videogame:latest cooljacob204/videogame:v$BUILD_ID'
+        sh 'docker build -t cooljacob204/videogame-tracker:v$BUILD_ID .'
       }
     }
     stage('Deploy Dockerhub') {
