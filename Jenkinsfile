@@ -13,12 +13,12 @@ pipeline {
     }
     stage('build') {
       steps {
-        sh 'docker build -t cooljacob204/videogame-tracker:${env.BUILD_ID} .'
+        sh 'docker build -t cooljacob204/videogame-tracker .'
       }
     }
     stage('Deploy Dockerhub') {
       steps {
-        sh 'docker push cooljacob204/videogame-tracker:${env.BUILD_ID}'
+        sh 'docker push cooljacob204/videogame-tracker'
       }
     }
   }
