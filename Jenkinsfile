@@ -14,6 +14,8 @@ pipeline {
     stage('build') {
       steps {
         sh 'docker build -t cooljacob204/videogame-tracker:latest .'
+        sh '''BUILD_ID=$(docker build -q -t foo . 2>/dev/null | awk \'/Successfully built/{print $NF}\')
+'''
         sh 'docker tag cooljacob204/videogame:latest cooljacob204/videogame:v${env.BUILD_ID}'
       }
     }
