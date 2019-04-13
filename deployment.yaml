@@ -33,7 +33,7 @@ spec:
       subdomain: webapp
       containers:
         - name: guest-portal
-          image: cooljacob204/guest-portal
+          image: cooljacob204/videogame-tracker:v$BUILD_ID
           ports:
           - name: guest-portal
             containerPort: 3000
