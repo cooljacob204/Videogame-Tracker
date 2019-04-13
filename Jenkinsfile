@@ -1,12 +1,12 @@
 pipeline {
   agent {
-    node {
-      label 'docker'
+    docker {
+      image 'docker'
     }
 
   }
   stages {
-    stage ('Checkout Code') {
+    stage('Checkout Code') {
       steps {
         checkout scm
       }
