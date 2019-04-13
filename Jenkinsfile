@@ -1,7 +1,7 @@
 pipeline {
   agent {
     docker {
-      image '_/docker:latest'
+      image 'ubuntu:18.04'
     }
 
   }
