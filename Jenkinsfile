@@ -3,7 +3,9 @@ pipeline {
     node {
       label 'master'
     }
-
+  }
+  triggers {
+    pollSCM ''
   }
   stages {
     stage('build') {
