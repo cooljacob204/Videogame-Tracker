@@ -22,4 +22,13 @@ class User < ActiveRecord::Base
       :role => role
     )
   end
+
+  def self.null_user
+    OpenStruct.new(
+      :firstname => nil,
+      :lastname => nil,
+      :email => nil,
+      :role => 'guest'
+    )
+  end
 end
