@@ -14,6 +14,8 @@ class ApplicationController < MyApp
     if user
       @user = user.cleaned
       @user_games = user.games.map{|game| [game.id, true]}.to_h
+    else
+      @user = User.null_user
     end
     erb :games
   end
