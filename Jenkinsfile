@@ -21,6 +21,7 @@ pipeline {
   stages {
     stage('build') {
       steps {
+        setBuildStatus("Build Pending", "PENDING")
         sh 'docker build -t cooljacob204/videogame-tracker:v$BUILD_ID .'
       }
     }
