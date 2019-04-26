@@ -8,7 +8,7 @@ class ApplicationController < MyApp
   end
 
   get '/games' do
-    @games = Game.all
+    @games = Game.all.order(:id)
     user = authenticate(session)
     @user_games = {}
     if user
@@ -20,6 +20,41 @@ class ApplicationController < MyApp
 
   get '/game/:id' do
     Game.find_by_id(params[:id]).name
+  end
+
+  get '/game/:id/edit' do
+    @game = Game.find_by_id(params[:id])
+    if @game
+      erb :game_edit
+    else
+      @errors = {'error' => ['game not found']}
+      erb :failure
+    end
+  end
+
+  post '/game/:id/edit' do
+    game = Game.find_by_id(params[:id])
+    game.name = params[:name]
+    game.genre = params[:genre]
+    game.publisher = params[:publisher]
+    game.description = params[:description]
+
+    if game.save
+      redirect "/game/#{game.id}"
+    else
+      @errors = game.errors.messages
+      erb :failure
+    end
+  end
+
+  get '/game/:id/delete' do
+    game = Game.find_by_id(params[:id])
+    if game.delete
+      redirect '/games'
+    else
+      @arrors = {'error' => ['game not found']}
+      erb :failure
+    end
   end
 
   get '/games/new' do

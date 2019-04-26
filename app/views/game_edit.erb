@@ -1,0 +1,20 @@
+<div class='user-container'>
+  <div class='user border border-secondary rounded centered'>
+    <h3>Add game</h3>
+    <hr>
+    <form action='/game/<%=@game.id%>/edit' method='post' class='userform'>
+      <label><b>Name</b>
+        <input type='text' id='name' name='name' value="<%=@game.name%>">
+      </label> 
+      <label><b>Genre</b>
+        <input type='text' id='genre' name='genre' value="<%=@game.genre%>">
+      </label> 
+      <label><b>Publisher</b>
+        <input type='text' id='publisher' name='publisher' value="<%=@game.publisher%>">
+      </label> 
+      <label><b>Description</b></label> 
+      <textarea rows="4" id='description' name='description'><%=@game.description%></textarea>
+      <input class="btn btn-primary" type="submit" id="submit">
+    </form>
+  </div>
+</div>
