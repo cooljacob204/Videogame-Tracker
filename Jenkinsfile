@@ -1,18 +1,27 @@
+void setBuildStatus(String message, String state) {
+  step([
+      $class: "GitHubCommitStatusSetter",
+      reposSource: [$class: "ManuallyEnteredRepositorySource", url: "https://github.com/cooljacob204/sinatra-project"],
+      contextSource: [$class: "ManuallyEnteredCommitContextSource", context: "ci/jenkins/build-status"],
+      errorHandlers: [[$class: "ChangingBuildStatusErrorHandler", result: "UNSTABLE"]],
+      statusResultSource: [ $class: "ConditionalStatusResultSource", results: [[$class: "AnyBuildResult", message: message, state: state]] ]
+  ]);
+}
+
+
 pipeline {
   agent {
     node {
       label 'master'
     }
-
+  }
+  triggers {
+    pollSCM ''
   }
   stages {
-    stage('Checkout Code') {
-      steps {
-        checkout scm
-      }
-    }
     stage('build') {
       steps {
+        setBuildStatus("Build Pending", "PENDING")
         sh 'docker build -t cooljacob204/videogame-tracker:v$BUILD_ID .'
       }
     }
@@ -23,10 +32,16 @@ pipeline {
     }
     stage('Deploy Kubernetes') {
       steps {
-        kubernetesDeploy(kubeconfigId: 'd679dcbe-d794-4fad-821c-8e8c85983901',               // REQUIRED
-                 configs: 'deployment.yaml', // REQUIRED
-          )
+        kubernetesDeploy(kubeconfigId: 'd679dcbe-d794-4fad-821c-8e8c85983901', configs: 'deployment.yaml')
       }
     }
   }
+  post {
+      success {
+          setBuildStatus("Build succeeded", "SUCCESS");
+      }
+      failure {
+          setBuildStatus("Build failed", "FAILURE");
+      }
+   }
 }

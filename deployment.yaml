@@ -33,6 +33,10 @@ spec:
       subdomain: webapp
       containers:
         - name: videogame-tracker
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 3000
           image: cooljacob204/videogame-tracker:v$BUILD_ID 
           ports:
           - name: primary
