@@ -22,7 +22,7 @@
             <% else %>
               <a href="/library/<%=game.id%>/add">Add to Library</a>  
             <% end %>
-            <% if @user.role == :moderator || @user.role == :admin || game.user_id == @user.id%>
+            <% if @user.role == 'moderator' || @user.role == 'admin' || game.user_id == @user.id%>
               | <a href="/game/<%=game.id%>/edit">edit</a> | <a href="/game/<%=game.id%>/delete">remove</a>
             <% end %>
           <% end %>
