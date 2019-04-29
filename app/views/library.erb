@@ -6,14 +6,17 @@
           <th scope='col'>Name</th>
           <th scope='col'>Genre</th>
           <th scope='col'>Description</th>
-          <th scope='col'>Remove From Library</th>
+          <th scope='col' class="text-right" ></th>
         </tr>
       </thead>
-      <%for game in @games%>
+      <%for game in @games %>
         <tr>
-          <td><%= game.name %></td>
+          <td><a href='/game/<%= game.id %>'><%= game.name %></a></td>
           <td><%= game.genre %></td>
           <td><%= game.description %></td>
+          <td class="text-right text-nowrap" scope='col'>
+            <a href="/library/<%=game.id%>/remove?location=library">remove from library</a>
+          </td>
         </tr>
       <% end %>
     </table>
