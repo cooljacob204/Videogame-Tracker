@@ -21,7 +21,9 @@ class ApplicationController < MyApp
   end
 
   get '/game/:id' do
-    Game.find_by_id(params[:id]).name
+    @game = Game.find_by_id(params[:id])
+
+    erb :game
   end
 
   get '/game/:id/edit' do
@@ -82,6 +84,7 @@ class ApplicationController < MyApp
   
   post '/games/new' do
     game = Game.new()
+    @user = authenticate(session).cleaned
     game.name = params[:name]
     game.genre = params[:genre]
     game.publisher = params[:publisher]
@@ -98,6 +101,7 @@ class ApplicationController < MyApp
   
   get '/library' do
     user = authenticate(session)
+    @user = user.cleaned
     @games = user.games if user
 
     erb :library
@@ -130,9 +134,13 @@ class ApplicationController < MyApp
       @errors = {'Games' => ['Game not found']}
     end
 
-     user.games.delete(game) if user.games.find_by_id(game.id)
+    user.games.delete(game) if user.games.find_by_id(game.id)
 
-     redirect '/games'
+    if params[:location] && params[:location] == 'library'
+      redirect '/library'
+    else
+      redirect '/games'
+    end
   end
   
   get '/failure' do
