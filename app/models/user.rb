@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
 
   has_many :user_games
   has_many :games, :through => :user_games
-  has_many :created_games, foreign_key: "user_id", class_name: "Game"
+  has_many :created_games, foreign_key: :user_id, class_name: :Game
 
 
   def approved?
