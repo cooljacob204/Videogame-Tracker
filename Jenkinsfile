@@ -15,14 +15,15 @@ pipeline {
       label 'master'
     }
   }
-  triggers {
-    pollSCM ''
+  environment {
+    registry = "cooljacob204/videogame-tracker"
+    registryCredential = '87198f1c-56ee-47ab-bcf4-a7033bf802c3'
   }
   stages {
     stage('build') {
       steps {
         setBuildStatus("Build Pending", "PENDING")
-        sh 'docker build -t cooljacob204/videogame-tracker:v$BUILD_ID .'
+        sh docker.build registry + ":v$BUILD_ID"
       }
     }
     stage('Deploy Dockerhub') {
