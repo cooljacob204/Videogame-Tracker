@@ -12,7 +12,7 @@
     </thead>
     <%for game in @games%>
       <tr>
-        <td><%= game.name %></td>
+        <td><a href='/game/<%= game.id %>'><%= game.name %></a></td>
         <td><%= game.genre %></td>
         <td><%= game.description %></td>
         <td class="text-right text-nowrap" scope='col'>
