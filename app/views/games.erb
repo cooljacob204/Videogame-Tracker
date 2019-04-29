@@ -5,9 +5,8 @@
         <th scope='col'>Name</th>
         <th scope='col'>Genre</th>
         <th scope='col'>Description</th>
-        <th scope='col'>In Library?</th>
         <% if @user.role != 'guest' %>
-          <th class="text-right" scope='col'>edit/remove</th>
+          <th class="text-right" scope='col'></th>
         <% end %>
       </tr>
     </thead>
@@ -16,14 +15,16 @@
         <td><%= game.name %></td>
         <td><%= game.genre %></td>
         <td><%= game.description %></td>
-        <% if @user_games[game.id] %>
-          <td class="text-nowrap">In Library</td>
-        <% else%>
-          <td class="text-nowrap">Add to Library</td>
-        <%end%>
-      <% if @user.role != 'guest' %>
         <td class="text-right text-nowrap" scope='col'>
-          <a href="/game/<%=game.id%>/edit">edit</a> | <a href="/game/<%=game.id%>/delete">remove</a>
+        <% if @user.role != 'guest' %>    
+          <% if @user_games[game.id] %>
+            <a href="/library/<%=game.id%>/remove">Remove from Library</a>
+          <% else %>
+            <a href="/library/<%=game.id%>/add">Add to Library</a>  
+          <% end %>
+          <% if @user.role == :moderator || @user.role == :admin || game.user_id == @user.id%>
+             | <a href="/game/<%=game.id%>/edit">edit</a> | <a href="/game/<%=game.id%>/delete">remove</a>
+          <% end %>
         </td>
       <% end %>
       </tr>
