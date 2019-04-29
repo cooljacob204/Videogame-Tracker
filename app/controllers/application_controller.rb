@@ -28,8 +28,8 @@ class ApplicationController < MyApp
     user = authenticate(session)
     @game = Game.find_by_id(params[:id])
     unless user && (@game.creator == authenticate(session) || user.admin? || user.moderator?)
-      @errors = {'error' => ['You do not have permissions to edit the game']}
-      erb :failure
+      @errors = {'Auth' => ['You do not have permissions to edit the game']}
+      return erb :failure
     end
     if @game
       erb :game_edit
@@ -42,9 +42,10 @@ class ApplicationController < MyApp
   post '/game/:id/edit' do
     user = authenticate(session)
     game = Game.find_by_id(params[:id])
+
     unless user && (game.creator == authenticate(session) || user.admin? || user.moderator?)
-      @errors = {'error' => ['You do not have permissions to edit the game']}
-      erb :failure
+      @errors = {'Auth' => ['You do not have permissions to edit the game']}
+      return erb :failure
     end
 
     game.name = params[:name]
@@ -64,8 +65,8 @@ class ApplicationController < MyApp
     user = authenticate(session)
     game = Game.find_by_id(params[:id])
     unless user && (game.creator == authenticate(session) || user.admin? || user.moderator?)
-      @errors = {'error' => ['You do not have permissions to delete the game']}
-      erb :failure
+      @errors = {'Auth' => ['You do not have permissions to delete the game']}
+      return erb :failure
     end
     if game.delete
       redirect '/games'
@@ -102,13 +103,37 @@ class ApplicationController < MyApp
     erb :library
   end
 
-  # get '/library/:id/add' do
-  #   user = authenticate(session)
-  #   game = Game.find_by_id(params[:id])
+  get '/library/:id/add' do
+    user = authenticate(session)
+    game = Game.find_by_id(params[:id])
+    
+    if !user
+      @errors = {'Auth' => ['Error authenticating user']}
+      erb :failure
+    elsif !game
+      @errors = {'Games' => ['Game not found']}
+    end
 
-  #   require 'pry'
-  #   binding.pry
-  # end
+    user.games << game if !user.games.find_by_id(game.id)
+      
+    redirect '/games'
+  end
+
+  get '/library/:id/remove' do
+    user = authenticate(session)
+    game = Game.find_by_id(params[:id])
+
+    if !user
+      @errors = {'Auth' => ['Error authenticating user']}
+      erb :failure
+    elsif !game
+      @errors = {'Games' => ['Game not found']}
+    end
+
+     user.games.delete(game) if user.games.find_by_id(game.id)
+
+     redirect '/games'
+  end
   
   get '/failure' do
     erb :failure
