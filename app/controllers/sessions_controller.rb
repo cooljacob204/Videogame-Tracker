@@ -35,7 +35,7 @@ class SessionsController < MyApp
     user.lastname = params[:lastname]
     user.password = params[:password]
     user.email = params[:email]
-    user.role = :guest
+    user.role = :normal
     user.approval = :approved
 
     if user.save
