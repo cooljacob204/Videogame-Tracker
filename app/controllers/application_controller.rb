@@ -69,6 +69,7 @@ class ApplicationController < MyApp
     game.genre = params[:genre]
     game.publisher = params[:publisher]
     game.description = params[:description]
+    game.user_id = authenticate(session).id
 
     if game.save
       redirect "game/#{game.id}"
