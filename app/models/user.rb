@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   validates :email, uniqueness: true
   has_secure_password
 
-  enum role: [:guest, :moderator, :admin]
+  enum role: [:guest, :normal ,:moderator, :admin]
   enum approval: [:declined, :waiting, :approved]
 
   has_many :user_games
@@ -20,7 +20,8 @@ class User < ActiveRecord::Base
       :firstname => firstname,
       :lastname => lastname,
       :email => email,
-      :role => role
+      :role => role,
+      :id => id
     )
   end
 
@@ -29,7 +30,8 @@ class User < ActiveRecord::Base
       :firstname => nil,
       :lastname => nil,
       :email => nil,
-      :role => 'guest'
+      :role => :guest,
+      :id => nil
     )
   end
 end
