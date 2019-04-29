@@ -23,7 +23,9 @@ pipeline {
     stage('build') {
       steps {
         setBuildStatus("Build Pending", "PENDING")
-        sh docker.build registry + ":v$BUILD_ID"
+        script {
+          docker.build registry + ":v$BUILD_ID"
+        }
       }
     }
     stage('Deploy Dockerhub') {
