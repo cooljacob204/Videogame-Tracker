@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   validates :email, uniqueness: true
   has_secure_password
 
-  enum role: [:guest, :manager, :admin]
+  enum role: [:guest, :moderator, :admin]
   enum approval: [:declined, :waiting, :approved]
 
   has_many :user_games

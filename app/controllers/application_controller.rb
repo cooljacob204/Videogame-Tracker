@@ -25,7 +25,12 @@ class ApplicationController < MyApp
   end
 
   get '/game/:id/edit' do
+    user = authenticate(session)
     @game = Game.find_by_id(params[:id])
+    unless user && (@game.creator == authenticate(session) || user.admin? || user.moderator?)
+      @errors = {'error' => ['You do not have permissions to edit the game']}
+      erb :failure
+    end
     if @game
       erb :game_edit
     else
@@ -35,7 +40,13 @@ class ApplicationController < MyApp
   end
 
   post '/game/:id/edit' do
+    user = authenticate(session)
     game = Game.find_by_id(params[:id])
+    unless user && (game.creator == authenticate(session) || user.admin? || user.moderator?)
+      @errors = {'error' => ['You do not have permissions to edit the game']}
+      erb :failure
+    end
+
     game.name = params[:name]
     game.genre = params[:genre]
     game.publisher = params[:publisher]
@@ -50,7 +61,12 @@ class ApplicationController < MyApp
   end
 
   get '/game/:id/delete' do
+    user = authenticate(session)
     game = Game.find_by_id(params[:id])
+    unless user && (game.creator == authenticate(session) || user.admin? || user.moderator?)
+      @errors = {'error' => ['You do not have permissions to delete the game']}
+      erb :failure
+    end
     if game.delete
       redirect '/games'
     else
@@ -85,6 +101,14 @@ class ApplicationController < MyApp
 
     erb :library
   end
+
+  # get '/library/:id/add' do
+  #   user = authenticate(session)
+  #   game = Game.find_by_id(params[:id])
+
+  #   require 'pry'
+  #   binding.pry
+  # end
   
   get '/failure' do
     erb :failure
