@@ -16,17 +16,17 @@
         <td><%= game.genre %></td>
         <td><%= game.description %></td>
         <td class="text-right text-nowrap" scope='col'>
-        <% if @user.role != 'guest' %>    
-          <% if @user_games[game.id] %>
-            <a href="/library/<%=game.id%>/remove">Remove from Library</a>
-          <% else %>
-            <a href="/library/<%=game.id%>/add">Add to Library</a>  
-          <% end %>
-          <% if @user.role == :moderator || @user.role == :admin || game.user_id == @user.id%>
-             | <a href="/game/<%=game.id%>/edit">edit</a> | <a href="/game/<%=game.id%>/delete">remove</a>
+          <% if @user.role != 'guest' %>    
+            <% if @user_games[game.id] %>
+              <a href="/library/<%=game.id%>/remove">Remove from Library</a>
+            <% else %>
+              <a href="/library/<%=game.id%>/add">Add to Library</a>  
+            <% end %>
+            <% if @user.role == :moderator || @user.role == :admin || game.user_id == @user.id%>
+              | <a href="/game/<%=game.id%>/edit">edit</a> | <a href="/game/<%=game.id%>/delete">remove</a>
+            <% end %>
           <% end %>
         </td>
-      <% end %>
       </tr>
     <% end %>
   </table>
