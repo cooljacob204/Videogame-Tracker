@@ -27,6 +27,7 @@ class SessionsController < MyApp
       redirect "/"
     else
       erb :failure
+    end
   end
 
   get '/register' do
