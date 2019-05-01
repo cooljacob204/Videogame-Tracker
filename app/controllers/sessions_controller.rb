@@ -13,16 +13,20 @@ class SessionsController < MyApp
       session[:role] = user.role
       redirect "/"
     else
+      @errors = {'Auth' => ['Email or password do not match']}
       redirect "/failure"
     end
   end
 
   get '/logout' do
-    user = User.find_by(:email => session[:email])
-    user.update(:session_id => nil) if user && user.session_id == session[:session_id]
-    
-    session.clear
-    redirect "/"
+    user = authenticate(session)
+    if user
+      user.update(:session_id => nil) if user && user.session_id == session[:session_id]
+      
+      session.clear
+      redirect "/"
+    else
+      erb :failure
   end
 
   get '/register' do
@@ -47,6 +51,7 @@ class SessionsController < MyApp
       
       erb :post_register
     else
+      @errors = user.errors.messages
       redirect "/failure"
     end
   end
