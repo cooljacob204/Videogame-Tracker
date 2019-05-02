@@ -41,6 +41,9 @@ pipeline {
     stage('Deploy Kubernetes') {
       steps {
         kubernetesDeploy(kubeconfigId: 'd679dcbe-d794-4fad-821c-8e8c85983901', configs: 'deployment.yaml')
+        withKubeConfig([credentialsId: 'd679dcbe-d794-4fad-821c-8e8c85983901']) {
+         sh 'kubectl rollout status deplay/videogame-tracker'
+        }
       }
     }
   }
