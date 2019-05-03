@@ -7,13 +7,10 @@ class ApplicationController < MyApp
   get '/games' do
     @games = Game.all.order(:id)
     user = authenticate(session)
+    @role = user.role
     @user_games = {}
-    if user
-      @user = user.cleaned
-      @user_games = user.games.map{|game| [game.id, true]}.to_h
-    else
-      @user = User.null_user
-    end
+    @user_games = user.games.map{|game| [game.id, true]}.to_h if user
+
     erb :games
   end
 
