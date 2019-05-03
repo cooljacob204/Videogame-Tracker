@@ -7,10 +7,7 @@ class SessionsController < MyApp
     user = User.find_by(:email => params[:email])
     if user && user.authenticate(params[:password]) && user.approved?
       user.update(:session_id => session[:session_id])
-      session[:firstname] = user.firstname
-      session[:lastname] = user.lastname
-      session[:email] = user.email
-      session[:role] = user.role
+      set_session(user)
       redirect "/"
     else
       @errors = {'Auth' => ['Email or password do not match']}
@@ -22,8 +19,8 @@ class SessionsController < MyApp
     user = authenticate(session)
     if user
       user.update(:session_id => nil) if user && user.session_id == session[:session_id]
-      
-      session.clear
+      set_session(User.null_user)
+
       redirect "/"
     else
       erb :failure
@@ -45,10 +42,7 @@ class SessionsController < MyApp
 
     if user.save
       user.update(:session_id => session[:session_id])
-      session[:firstname] = user.firstname
-      session[:lastname] = user.lastname
-      session[:email] = user.email
-      session[:role] = user.role
+      set_session(user)
       
       erb :post_register
     else
