@@ -3,5 +3,10 @@
     <h2>
       Welcome to lfp2's Videogame tracker
     </h2>
+    <% unless session[:email] %>
+      <p>
+        Please log in to continue
+      </p>
+    <% end %>
   </div>
 </div>
