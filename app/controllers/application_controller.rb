@@ -81,7 +81,6 @@ class ApplicationController < MyApp
   
   post '/games/new' do
     game = Game.new()
-    @user = authenticate(session).cleaned
     game.name = params[:name]
     game.genre = params[:genre]
     game.publisher = params[:publisher]
@@ -98,7 +97,6 @@ class ApplicationController < MyApp
   
   get '/library' do
     user = authenticate(session)
-    @user = user.cleaned
     @games = user.games if user
 
     erb :library
