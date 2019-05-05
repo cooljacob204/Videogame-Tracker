@@ -9,7 +9,7 @@ class ApplicationController < MyApp
     user = authenticate(session)
     @role = user.role
     @user_games = {}
-    @user_games = user.games.map{|game| [game.id, true]}.to_h if user
+    @user_games = user.games.map{|game| [game.id, true]}.to_h if user.games
 
     erb :games
   end
@@ -94,7 +94,7 @@ class ApplicationController < MyApp
   
   get '/library' do
     user = authenticate(session)
-    @games = user.games if user
+    @games = user.games if user.games
 
     erb :library
   end
@@ -119,14 +119,16 @@ class ApplicationController < MyApp
     user = authenticate(session)
     game = Game.find_by_id(params[:id])
 
-    if !user
+    if !user.email
       @errors = {'Auth' => ['Error authenticating user']}
       erb :failure
     elsif !game
       @errors = {'Games' => ['Game not found']}
     end
 
-    user.games.delete(game) if user.games.find_by_id(game.id)
+    if user.games && user.games.find_by_id(game.id)
+      user.games.delete(game)
+    end
 
     if params[:location] && params[:location] == 'library'
       redirect '/library'

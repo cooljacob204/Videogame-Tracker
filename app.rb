@@ -19,7 +19,7 @@ class MyApp < Sinatra::Base
     user = User.find_by(:email => session[:email])
     return user if user && user.session_id == session[:session_id]
     set_session(User.null_user)
-    false
+    User.null_user
   end
 
   def set_session(user)
