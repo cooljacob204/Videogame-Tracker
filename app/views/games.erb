@@ -31,6 +31,8 @@
     <% end %>
   </table>
 </div>
-<div class='text-center'>
-  <a href='/games/new'>click here to add more games</a>
-</div>
+<% if user.role != 'guest' %>
+  <div class='text-center'>
+    <a href='/games/new'>click here to add more games</a>
+  </div>
+<% end %>
