@@ -11,5 +11,12 @@
       </label> 
       <input class='btn btn-primary' type='submit' id='submit'>
     </form>
+    <% if @errors %>
+      <% @errors.each do |key, error| %>
+        <% error.each do |error_msg| %>
+        <p class='text-danger'><%= error_msg %></p>
+        <% end %>
+      <% end %>
+    <% end %>
   </div>
 </div>

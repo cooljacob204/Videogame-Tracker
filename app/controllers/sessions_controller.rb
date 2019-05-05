@@ -11,7 +11,7 @@ class SessionsController < MyApp
       redirect "/"
     else
       @errors = {'Auth' => ['Email or password do not match']}
-      redirect "/failure"
+      erb :login
     end
   end
 
