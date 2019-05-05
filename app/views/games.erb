@@ -15,8 +15,8 @@
         <td><a href='/game/<%= game.id %>'><%= game.name %></a></td>
         <td><%= game.genre %></td>
         <td><%= game.description %></td>
-        <td class="text-right text-nowrap" scope='col'>
-          <% if @role != :guest %>    
+        <% if @role != :guest %>    
+          <td class="text-right text-nowrap" scope='col'>
             <% if @user_games[game.id] %>
               <a href="/library/<%=game.id%>/remove">Remove from Library</a>
             <% else %>
@@ -25,14 +25,13 @@
             <% if @role == 'moderator' || @role == 'admin' || game.creator.email == session[:email] %>
               | <a href="/game/<%=game.id%>/edit">edit</a> | <a href="/game/<%=game.id%>/delete">remove</a>
             <% end %>
-          <% end %>
-        </td>
+          </td>
+        <% end %>
       </tr>
     <% end %>
   </table>
 </div>
 <% if @role != :guest %>
-<% require 'pry'; binding.pry%>
   <div class='text-center'>
     <a href='/games/new'>click here to add more games</a>
   </div>
