@@ -5,7 +5,7 @@
         <th scope='col'>Name</th>
         <th scope='col'>Genre</th>
         <th scope='col'>Description</th>
-        <% if @role != 'guest' %>
+        <% if @role != :guest %>
           <th class="text-right" scope='col'></th>
         <% end %>
       </tr>
@@ -16,7 +16,7 @@
         <td><%= game.genre %></td>
         <td><%= game.description %></td>
         <td class="text-right text-nowrap" scope='col'>
-          <% if @role != 'guest' %>    
+          <% if @role != :guest %>    
             <% if @user_games[game.id] %>
               <a href="/library/<%=game.id%>/remove">Remove from Library</a>
             <% else %>
@@ -31,7 +31,8 @@
     <% end %>
   </table>
 </div>
-<% if @role != 'guest' %>
+<% if @role != :guest %>
+<% require 'pry'; binding.pry%>
   <div class='text-center'>
     <a href='/games/new'>click here to add more games</a>
   </div>
