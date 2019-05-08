@@ -13,7 +13,7 @@ Sinatra Portfolio project and a CI/CD sandbox for experimenting with Jenkins, Do
    * .approved?
      * Not used but can be used in the future if I wish to lock out certain Users.
    * .cleaned
-     * Returns a cleaned OpenStruct object with the basic User Attributes in case I wish to store them a user in session.
+     * Returns a cleaned OpenStruct object with the basic User Attributes in case I wish to store the user in session.
    * #null_user
      * A user with empty attributes for logged out guests. Also prevents nil related errors.
  * UserGame
