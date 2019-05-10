@@ -10,7 +10,7 @@
         <% end %>
       </tr>
     </thead>
-    <%for game in @games%>
+    <% @games.each do |game| %>
       <tr>
         <td><a href='/game/<%= game.id %>'><%= game.name %></a></td>
         <td><%= game.genre %></td>
