@@ -16,7 +16,7 @@ class UsersController < ApplicationController
   end
 
   get '/logout' do
-    user = authenticate(session)
+    user = authenticate
     if user
       user.update(:session_id => nil) if user && user.session_id == session[:session_id]
       set_session(User.null_user)

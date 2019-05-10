@@ -1,7 +1,7 @@
 class GamesController < ApplicationController
   get '/games' do
     @games = Game.all.order(:id)
-    user = authenticate(session)
+    user = authenticate
     @role = user.role
     @user_games = {}
     @user_games = user.games.map{|game| [game.id, true]}.to_h if user.games
@@ -16,9 +16,9 @@ class GamesController < ApplicationController
   end
 
   get '/game/:id/edit' do
-    user = authenticate(session)
+    user = authenticate
     @game = Game.find_by_id(params[:id])
-    unless user && (@game.creator == authenticate(session) || user.admin? || user.moderator?)
+    unless user && (@game.creator == authenticate || user.admin? || user.moderator?)
       @errors = {'Auth' => ['You do not have permissions to edit the game']}
       return erb :failure
     end
@@ -31,10 +31,10 @@ class GamesController < ApplicationController
   end
 
   post '/game/:id/edit' do
-    user = authenticate(session)
+    user = authenticate
     game = Game.find_by_id(params[:id])
 
-    unless user && (game.creator == authenticate(session) || user.admin? || user.moderator?)
+    unless user && (game.creator == authenticate || user.admin? || user.moderator?)
       @errors = {'Auth' => ['You do not have permissions to edit the game']}
       return erb :failure
     end
@@ -53,9 +53,9 @@ class GamesController < ApplicationController
   end
 
   get '/game/:id/delete' do
-    user = authenticate(session)
+    user = authenticate
     game = Game.find_by_id(params[:id])
-    unless user && (game.creator == authenticate(session) || user.admin? || user.moderator?)
+    unless user && (game.creator == authenticate || user.admin? || user.moderator?)
       @errors = {'Auth' => ['You do not have permissions to delete the game']}
       return erb :failure
     end
@@ -77,7 +77,7 @@ class GamesController < ApplicationController
     game.genre = params[:genre]
     game.publisher = params[:publisher]
     game.description = params[:description]
-    game.creator = authenticate(session)
+    game.creator = authenticate
 
     if game.save
       redirect "game/#{game.id}"

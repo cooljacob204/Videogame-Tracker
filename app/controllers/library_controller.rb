@@ -1,14 +1,14 @@
 class LibraryController < ApplicationController
   get '/library' do
     user_logged_in 
-    user = authenticate(session)
+    user = authenticate
     @games = user.games if user.games
 
     erb :'library/index'
   end
 
   get '/library/:id/add' do
-    user = authenticate(session)
+    user = authenticate
     game = Game.find_by_id(params[:id])
     
     if !user
@@ -24,7 +24,7 @@ class LibraryController < ApplicationController
   end
 
   get '/library/:id/remove' do
-    user = authenticate(session)
+    user = authenticate
     game = Game.find_by_id(params[:id])
 
     if !user.email

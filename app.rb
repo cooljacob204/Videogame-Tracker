@@ -15,7 +15,7 @@ class ApplicationController < Sinatra::Base
     enable :sessions
   end
 
-  def authenticate(session)
+  def authenticate
     user = User.find_by(:email => session[:email])
     return user if user && user.session_id == session[:session_id]
     set_session(User.null_user)
@@ -36,7 +36,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/' do
-    authenticate(session)
+    authenticate
     erb :index
   end
   
