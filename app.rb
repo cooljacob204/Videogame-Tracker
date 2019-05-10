@@ -16,21 +16,18 @@ class ApplicationController < Sinatra::Base
   end
 
   def authenticate
-    user = User.find_by(:email => session[:email])
+    user = User.find_by(:id => session[:id])
     return user if user && user.session_id == session[:session_id]
     set_session(User.null_user)
     User.null_user
   end
 
   def set_session(user)
-    session[:firstname] = user.firstname
-    session[:lastname] = user.lastname
-    session[:email] = user.email
-    session[:role] = user.role
+    session[:id] = user.id
   end
 
   def user_logged_in
-    unless session[:email]
+    unless session[:id]
       redirect '/login'
     end
   end

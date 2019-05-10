@@ -22,7 +22,7 @@
             <% else %>
               <a href="/library/<%=game.id%>/add">Add to Library</a>  
             <% end %>
-            <% if @role == 'moderator' || @role == 'admin' || game.creator.email == session[:email] %>
+            <% if @role == 'moderator' || @role == 'admin' || game.creator.id == session[:id] %>
               | <a href="/game/<%=game.id%>/edit">edit</a> | <a href="/game/<%=game.id%>/delete">remove</a>
             <% end %>
           </td>

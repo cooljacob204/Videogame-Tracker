@@ -19,6 +19,7 @@ class UsersController < ApplicationController
     user = authenticate
     if user
       user.update(:session_id => nil) if user && user.session_id == session[:session_id]
+      session.clear
       set_session(User.null_user)
 
       redirect "/"
