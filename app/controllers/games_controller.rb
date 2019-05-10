@@ -6,13 +6,13 @@ class GamesController < ApplicationController
     @user_games = {}
     @user_games = user.games.map{|game| [game.id, true]}.to_h if user.games
 
-    erb :games
+    erb :'games/index'
   end
 
   get '/game/:id' do
     @game = Game.find_by_id(params[:id])
 
-    erb :game
+    erb :'games/show'
   end
 
   get '/game/:id/edit' do
@@ -23,7 +23,7 @@ class GamesController < ApplicationController
       return erb :failure
     end
     if @game
-      erb :game_edit
+      erb :'games/edit'
     else
       @errors = {'error' => ['game not found']}
       erb :failure
@@ -68,7 +68,7 @@ class GamesController < ApplicationController
   end
 
   get '/games/new' do
-    erb :game_new
+    erb :'games/new'
   end
   
   post '/games/new' do

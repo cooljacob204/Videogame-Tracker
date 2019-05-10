@@ -4,7 +4,7 @@ class LibraryController < ApplicationController
     user = authenticate(session)
     @games = user.games if user.games
 
-    erb :library
+    erb :'library/index'
   end
 
   get '/library/:id/add' do

@@ -27,6 +27,7 @@ Sinatra Portfolio project and a CI/CD sandbox for experimenting with Jenkins, Do
    * Belongs to creator which is an alias for the User that created it.
 
 ### Controllers
+## Not currently accurate
  * MyApp < Sinatra::Base
    * Application controller which all others inherit authentication and settings from.
    * Configures views and public assets directory to be within app.
