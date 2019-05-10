@@ -7,7 +7,7 @@ require_all 'app/models'
 set :database_file, 'db/config.yml'
 
 
-class MyApp < Sinatra::Base
+class ApplicationController < Sinatra::Base
   configure do
     set :public_folder, 'app/public'
     set :views, 'app/views'
@@ -28,4 +28,11 @@ class MyApp < Sinatra::Base
     session[:email] = user.email
     session[:role] = user.role
   end
+
+  def user_logged_in
+    unless session[:email]
+      redirect '/login'
+    end
+  end
+
 end
