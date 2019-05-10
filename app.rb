@@ -35,4 +35,12 @@ class ApplicationController < Sinatra::Base
     end
   end
 
+  get '/' do
+    authenticate(session)
+    erb :index
+  end
+  
+  get '/failure' do
+    erb :failure
+  end
 end

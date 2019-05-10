@@ -1,9 +1,4 @@
 class GamesController < ApplicationController
-  get '/' do
-    authenticate(session)
-    erb :index
-  end
-
   get '/games' do
     @games = Game.all.order(:id)
     user = authenticate(session)
@@ -90,9 +85,5 @@ class GamesController < ApplicationController
       @errors = game.errors.messages
       erb :failure
     end
-  end
-  
-  get '/failure' do
-    erb :failure
   end
 end
