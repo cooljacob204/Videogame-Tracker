@@ -45,10 +45,10 @@ class UsersController < ApplicationController
       user.update(:session_id => session[:session_id])
       set_session(user)
       
-      erb :'users/post_register'
+      erb :'users/register_post'
     else
       @errors = user.errors.messages
-      redirect "/failure"
+      erb :'users/register'
     end
   end
 end
