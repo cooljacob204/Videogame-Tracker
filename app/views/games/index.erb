@@ -23,7 +23,7 @@
               <a href="/library/<%=game.id%>/add">add to library</a>  
             <% end %>
             <% if @role == 'moderator' || @role == 'admin' || game.creator.id == session[:id] %>
-              | <a href="/game/<%=game.id%>/edit">edit</a> | <a onclick='test("/game/<%= game.id %>/delete")' href='#'>remove</a>
+              | <a href="/game/<%=game.id%>/edit">edit</a> | <a onclick='remove_game("/game/<%= game.id %>")' href='#'>remove</a>
             <% end %>
           </td>
         <% end %>
@@ -35,5 +35,5 @@
   <div class='text-center'>
     <a href='/games/new'>click here to add more games</a>
   </div>
-  <script src="/remove_user.js"></script>
+  <script src="/remove_game.js"></script>
 <% end %>
