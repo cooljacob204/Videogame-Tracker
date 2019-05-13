@@ -1,8 +1,9 @@
+<% user = User.find_by_id(session[:id]) %>
 <div class="header">
   <div class="header-home">
     <strong><a href='/'>Home</a></strong>
   </div>
-    <% if session[:email] %>
+    <% if user %>
 
       <div class='header-user-spacer'>|</div>
       <div class="header-home">
@@ -17,9 +18,9 @@
       </div>
 
 
-    <% if session[:email] %>
+    <% if user %>
       <div class="header-email header-user">
-        <b><%= session[:email] %></b>
+        <b><%= user.email %></b>
       </div>
       <div class='header-user-spacer'>|</div>
       <div class="header-login header-user">

@@ -1,6 +1,6 @@
-class SessionsController < MyApp
+class UsersController < ApplicationController
   get '/login' do
-    erb :login
+    erb :'users/login'
   end
 
   post '/login' do
@@ -11,14 +11,15 @@ class SessionsController < MyApp
       redirect "/"
     else
       @errors = {'Auth' => ['Email or password do not match']}
-      erb :login
+      erb :'users/login'
     end
   end
 
   get '/logout' do
-    user = authenticate(session)
+    user = authenticate
     if user
       user.update(:session_id => nil) if user && user.session_id == session[:session_id]
+      session.clear
       set_session(User.null_user)
 
       redirect "/"
@@ -28,7 +29,7 @@ class SessionsController < MyApp
   end
 
   get '/register' do
-    erb :register
+    erb :'users/register'
   end
 
   post '/register' do
@@ -44,7 +45,7 @@ class SessionsController < MyApp
       user.update(:session_id => session[:session_id])
       set_session(user)
       
-      erb :post_register
+      erb :'users/post_register'
     else
       @errors = user.errors.messages
       redirect "/failure"
