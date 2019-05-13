@@ -62,3 +62,8 @@ spec:
               secretKeyRef:
                 name: videogame-tracker
                 key: db-host
+          - name: SESSION_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: videogame-tracker
+                key: session-secret
