@@ -11,19 +11,19 @@
       </tr>
     </thead>
     <% @games.each do |game| %>
-      <tr>
+      <tr id='<%= game.id %>'>
         <td><a href='/game/<%= game.id %>'><%= game.name %></a></td>
         <td><%= game.genre %></td>
         <td><%= game.description %></td>
         <% if @role != :guest %>    
           <td class="text-right text-nowrap" scope='col'>
             <% if @user_games[game.id] %>
-              <a href="/library/<%=game.id%>/remove">Remove from Library</a>
+              <a href="/library/<%=game.id%>/remove">remove from library</a>
             <% else %>
-              <a href="/library/<%=game.id%>/add">Add to Library</a>  
+              <a href="/library/<%=game.id%>/add">add to library</a>  
             <% end %>
             <% if @role == 'moderator' || @role == 'admin' || game.creator.id == session[:id] %>
-              | <a href="/game/<%=game.id%>/edit">edit</a> | <a href="/game/<%=game.id%>/delete">remove</a>
+              | <a href="/game/<%=game.id%>/edit">edit</a> | <a onclick='remove_game("/game/<%= game.id %>")' href='#'>remove</a>
             <% end %>
           </td>
         <% end %>
@@ -35,4 +35,5 @@
   <div class='text-center'>
     <a href='/games/new'>click here to add more games</a>
   </div>
+  <script src="/remove_game.js"></script>
 <% end %>

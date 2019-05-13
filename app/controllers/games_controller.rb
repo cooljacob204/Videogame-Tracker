@@ -30,7 +30,7 @@ class GamesController < ApplicationController
     end
   end
 
-  post '/game/:id/edit' do
+  put '/game/:id' do
     user = authenticate
     game = Game.find_by_id(params[:id])
 
@@ -52,17 +52,27 @@ class GamesController < ApplicationController
     end
   end
 
-  get '/game/:id/delete' do
+  delete '/game/:id' do
     user = authenticate
     game = Game.find_by_id(params[:id])
-    unless user && (game.creator == authenticate || user.admin? || user.moderator?)
-      @errors = {'Auth' => ['You do not have permissions to delete the game']}
+
+    unless game
+      @errors = {'error' => ['game not found']}
+      status 404
       return erb :failure
     end
+
+    unless user && (game.creator == authenticate || user.admin? || user.moderator?)
+      @errors = {'Auth' => ['You do not have permissions to delete the game']}
+      status 401
+      return erb :failure
+    end
+
     if game.delete
       redirect '/games'
     else
-      @arrors = {'error' => ['game not found']}
+      @errors = {'error' => ['internal server error']}
+      status 500
       erb :failure
     end
   end
