@@ -52,7 +52,7 @@ class GamesController < ApplicationController
     end
   end
 
-  get '/game/:id/delete' do
+  post '/game/:id/delete' do
     user = authenticate
     game = Game.find_by_id(params[:id])
     unless user && (game.creator == authenticate || user.admin? || user.moderator?)
