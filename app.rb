@@ -17,7 +17,7 @@ class ApplicationController < Sinatra::Base
 
   def authenticate
     user = User.find_by(:id => session[:id])
-    return user if user && user.session_id == session[:session_id]
+    return user if user && user.session_id == session[:session_id].to_s
     set_session(User.null_user)
     User.null_user
   end

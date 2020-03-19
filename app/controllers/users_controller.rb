@@ -18,7 +18,7 @@ class UsersController < ApplicationController
   get '/logout' do
     user = authenticate
     if user
-      user.update(:session_id => nil) if user && user.session_id == session[:session_id]
+      user.update(:session_id => nil) if user && user.session_id == session[:session_id].to_s
       session.clear
       set_session(User.null_user)
 
@@ -42,7 +42,7 @@ class UsersController < ApplicationController
     user.approval = :approved
 
     if user.save
-      user.update(:session_id => session[:session_id])
+      user.update(:session_id => session[:session_id].to_s)
       set_session(user)
       
       erb :'users/register_post'
