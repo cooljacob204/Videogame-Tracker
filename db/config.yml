@@ -21,4 +21,3 @@ test:
 production:
   <<: *default
   database: home_production
-  sslmode: require
