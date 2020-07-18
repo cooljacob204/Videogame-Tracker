@@ -1,6 +1,6 @@
 class LibraryController < ApplicationController
   get '/library' do
-    user_logged_in 
+    user_logged_in
     user = authenticate
     @games = user.games if user.games
 
@@ -10,16 +10,16 @@ class LibraryController < ApplicationController
   get '/library/:id/add' do
     user = authenticate
     game = Game.find_by_id(params[:id])
-    
+
     if !user
-      @errors = {'Auth' => ['Error authenticating user']}
+      @errors = { 'Auth' => ['Error authenticating user'] }
       erb :failure
     elsif !game
-      @errors = {'Games' => ['Game not found']}
+      @errors = { 'Games' => ['Game not found'] }
     end
 
-    user.games << game if !user.games.find_by_id(game.id)
-      
+    user.games << game unless user.games.find_by_id(game.id)
+
     redirect '/games'
   end
 
@@ -28,15 +28,13 @@ class LibraryController < ApplicationController
     game = Game.find_by_id(params[:id])
 
     if !user.email
-      @errors = {'Auth' => ['Error authenticating user']}
+      @errors = { 'Auth' => ['Error authenticating user'] }
       erb :failure
     elsif !game
-      @errors = {'Games' => ['Game not found']}
+      @errors = { 'Games' => ['Game not found'] }
     end
 
-    if user.games && user.games.find_by_id(game.id)
-      user.games.delete(game)
-    end
+    user.games.delete(game) if user.games&.find_by_id(game.id)
 
     if params[:location] && params[:location] == 'library'
       redirect '/library'

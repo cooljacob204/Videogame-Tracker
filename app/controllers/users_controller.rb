@@ -4,13 +4,13 @@ class UsersController < ApplicationController
   end
 
   post '/login' do
-    user = User.find_by(:email => params[:email])
-    if user && user.authenticate(params[:password]) && user.approved?
-      user.update(:session_id => session[:session_id])
+    user = User.find_by(email: params[:email])
+    if user&.authenticate(params[:password]) && user&.approved?
+      user.update(session_id: session[:session_id])
       set_session(user)
-      redirect "/"
+      redirect '/'
     else
-      @errors = {'Auth' => ['Email or password do not match']}
+      @errors = { 'Auth' => ['Email or password do not match'] }
       erb :'users/login'
     end
   end
@@ -18,11 +18,11 @@ class UsersController < ApplicationController
   get '/logout' do
     user = authenticate
     if user
-      user.update(:session_id => nil) if user && user.session_id == session[:session_id].to_s
+      user.update(session_id: nil) if user && user.session_id == session[:session_id].to_s
       session.clear
       set_session(User.null_user)
 
-      redirect "/"
+      redirect '/'
     else
       erb :failure
     end
@@ -42,9 +42,9 @@ class UsersController < ApplicationController
     user.approval = :approved
 
     if user.save
-      user.update(:session_id => session[:session_id].to_s)
+      user.update(session_id: session[:session_id].to_s)
       set_session(user)
-      
+
       erb :'users/register_post'
     else
       @errors = user.errors.messages

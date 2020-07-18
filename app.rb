@@ -9,7 +9,6 @@ require 'require_all'
 require_all 'app/models'
 set :database_file, 'db/config.yml'
 
-
 class ApplicationController < Sinatra::Base
   configure do
     set :public_folder, 'app/public'
@@ -19,8 +18,9 @@ class ApplicationController < Sinatra::Base
   end
 
   def authenticate
-    user = User.find_by(:id => session[:id])
+    user = User.find_by(id: session[:id])
     return user if user && user.session_id == session[:session_id].to_s
+
     set_session(User.null_user)
     User.null_user
   end
@@ -30,16 +30,14 @@ class ApplicationController < Sinatra::Base
   end
 
   def user_logged_in
-    unless session[:id]
-      redirect '/login'
-    end
+    redirect '/login' unless session[:id]
   end
 
   get '/' do
     authenticate
     erb :index
   end
-  
+
   get '/failure' do
     erb :failure
   end

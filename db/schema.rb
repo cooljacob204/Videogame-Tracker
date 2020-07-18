@@ -10,39 +10,37 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_29_214348) do
-
+ActiveRecord::Schema.define(version: 20_190_429_214_348) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+  enable_extension 'plpgsql'
 
-  create_table "games", force: :cascade do |t|
-    t.string "name"
-    t.string "publisher"
-    t.string "genre"
-    t.string "description"
-    t.string "image_icon"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "user_id"
+  create_table 'games', force: :cascade do |t|
+    t.string 'name'
+    t.string 'publisher'
+    t.string 'genre'
+    t.string 'description'
+    t.string 'image_icon'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.integer 'user_id'
   end
 
-  create_table "user_games", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "game_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table 'user_games', force: :cascade do |t|
+    t.integer 'user_id'
+    t.integer 'game_id'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
   end
 
-  create_table "users", force: :cascade do |t|
-    t.string "firstname"
-    t.string "lastname"
-    t.string "email"
-    t.string "password_digest"
-    t.integer "role"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "session_id"
-    t.integer "approval"
+  create_table 'users', force: :cascade do |t|
+    t.string 'firstname'
+    t.string 'lastname'
+    t.string 'email'
+    t.string 'password_digest'
+    t.integer 'role'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.string 'session_id'
+    t.integer 'approval'
   end
-
 end
