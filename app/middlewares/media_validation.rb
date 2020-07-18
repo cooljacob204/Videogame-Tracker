@@ -12,9 +12,6 @@ class MediaValidation
     
     return @app.call(env) unless req.path.match(/metrics/)
 
-    require 'pry'
-    binding.pry
-    
     if allowed_networks===IPAddr.new(req.ip)
       @app.call(env)
     else
