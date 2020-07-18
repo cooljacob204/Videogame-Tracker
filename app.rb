@@ -1,6 +1,9 @@
 require 'sinatra'
 require 'sinatra/activerecord'
 require 'dotenv/load'
+require 'prometheus/client'
+require 'prometheus/middleware/collector'
+require 'prometheus/middleware/exporter'
 require 'require_all'
 
 require_all 'app/models'

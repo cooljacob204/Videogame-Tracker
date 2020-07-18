@@ -10,6 +10,8 @@ gem 'thin'
 gem 'dotenv'
 gem 'bcrypt'
 
+gem 'prometheus-client'
+
 group :development do
   gem 'rerun' if Gem.win_platform?
 end
