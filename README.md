@@ -1,12 +1,9 @@
 # Videogame-Tracker
 Sinatra Portfolio project and a CI/CD sandbox for experimenting with Jenkins, Docker and Kubernetes.
 
-## ~~Hosting~~
-### ~~https://videogame-tracker.lfp2.gg~~
-~~I have the app currently hosted on Google Kubernetes Engine. The docker image is hosted at cooljacob204/videogame-tracker.~~
+## Hosting
+### https://videogame-tracker.lfp2.gg
 
-~~My cluster has a Jenkins deployment that waits for a push from Github when a new commit is made on this project's master branch. When it receives that push it builds a new docker image, pushes it to dockerhub then deploys it to the cluster.~~
+App is hosted in a container on my local network in a box running [unraid](https://unraid.net/). Requests are routed through an external Digital Ocean droplet using Haproxy to route to a specified backend which then goes into a Wireguard tunnel which is connected to my internal container network that contains all of my applications.
 
-~~This project's deployment has a readiness probe running at '/'. If GKE doesn't detect the updated app running after the default amount of time Kubernetes will cancel the deployment and roll back any pods that were updated.~~
-
-Edit: GCP was fun to play around with but it became too expensive so for now the project is not hosted anywhere.
+I am using certbot, haproxy and bi-monthly cronjob to serve and maintain my SSL certs.
