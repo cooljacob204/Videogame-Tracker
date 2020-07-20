@@ -14,7 +14,7 @@ class ApplicationController < Sinatra::Base
     set :public_folder, 'app/public'
     set :views, 'app/views'
     use Rack::Session::Cookie, key: 'rack.session',
-                               path: '/'
+                               path: '/',
                                secret: ENV['SESSION_SECRET']
   end
 
