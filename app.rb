@@ -13,8 +13,9 @@ class ApplicationController < Sinatra::Base
   configure do
     set :public_folder, 'app/public'
     set :views, 'app/views'
-    set :session_secret, ENV['SESSION_SECRET']
-    enable :sessions
+    use Rack::Session::Cookie, key: 'rack.session',
+                               path: '/'
+                               secret: ENV['SESSION_SECRET']
   end
 
   def authenticate
